@@ -1,0 +1,18 @@
+services:
+  app:
+    build: .
+    volumes:
+      - .:/app
+      - ./uploads:/app/uploads
+      - ./data:/app/data # Persist your SQLite DB file (e.g., todos.db)
+
+    ports:
+      - '8550:8550'
+    command: python main.py gui
+
+  cli:
+    build: .
+    volumes:
+      - .:/app
+      - ./data:/app/data
+    entrypoint: python main.py cli
